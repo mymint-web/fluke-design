@@ -14,7 +14,7 @@
 --main:#FFB09C;
 --dark:#E58E7D;
 --white:#FFFFFF;
---glow:rgba(255,176,156,0.4);
+--glow:rgba(255,176,156,0.6);
 --green:#88D498;
 --red:#FF8787;
 }
@@ -25,6 +25,20 @@ body{
 background:var(--bg);
 display:flex;
 justify-content:center;
+}
+
+/* Animation ไฟกระพริบสำหรับกรอบ */
+@keyframes borderGlow {
+  0% { box-shadow: 0 8px 20px rgba(0,0,0,0.05), 0 0 5px var(--glow); border-color: var(--main); }
+  50% { box-shadow: 0 8px 25px var(--glow), 0 0 15px var(--glow); border-color: #ff9e85; }
+  100% { box-shadow: 0 8px 20px rgba(0,0,0,0.05), 0 0 5px var(--glow); border-color: var(--main); }
+}
+
+/* Animation ไฟกระพริบสำหรับปุ่มสถานะ */
+@keyframes statusGlow {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.02); box-shadow: 0 0 12px var(--main); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 .container{
@@ -40,6 +54,8 @@ padding:25px 20px;
 margin-bottom:20px;
 box-shadow:0 8px 20px rgba(0,0,0,0.05);
 border:2px solid var(--main);
+/* เพิ่มไฟกระพริบที่กรอบข้อความทุกอัน */
+animation: borderGlow 3s infinite ease-in-out;
 }
 
 h1,h2,h3{color:var(--dark);}
@@ -80,12 +96,15 @@ border-radius:25px;
 text-decoration:none;
 margin-top:15px;
 font-weight:500;
+transition: 0.3s;
 }
 
 .btn-outline{
 background:#fff;
 border:2px dashed var(--main);
 color:var(--dark);
+/* เพิ่มไฟกระพริบที่ปุ่มสถานะคิว */
+animation: statusGlow 2s infinite ease-in-out;
 }
 
 .btn-main{
@@ -155,7 +174,6 @@ border:1px solid #ffeef5;
 
 .small{font-size:12px;opacity:.7;margin-top:10px;}
 
-/* สไตล์เพิ่มเติมสำหรับช่องสีเขียว/แดง ตามที่ระบุในข้อ 8, 9 */
 .status-box{
 padding:10px;
 border-radius:12px;
@@ -171,7 +189,7 @@ color:#fff;
 <body>
 <div class="container">
 
-<div class="section center" style="border:none;box-shadow:none;background:transparent;">
+<div class="section center" style="border:none;box-shadow:none;background:transparent; animation:none;">
 
 <div class="logo">
 <img src="logo.jpg" alt="logo">
@@ -254,4 +272,3 @@ color:#fff;
 </div>
 </body>
 </html>
-END OF FILE
