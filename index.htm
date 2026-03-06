@@ -9,7 +9,6 @@
 
 <style>
 :root{
-/* ปรับโทนสีเป็นชมพูพีชตามสั่ง */
 --bg:#FFF5F0; 
 --main:#FFB09C;
 --dark:#E58E7D;
@@ -25,6 +24,19 @@ body{
 background:var(--bg);
 display:flex;
 justify-content:center;
+overflow-x: hidden; /* กันหัวใจลอยออกนอกจอ */
+}
+
+/* --- [NEW] Animation ละอองหัวใจฟุ้งๆ --- */
+@keyframes floatUp {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+.heart-particle {
+  position: fixed; bottom: -10%; color: var(--main);
+  user-select: none; pointer-events: none; z-index: -1;
+  animation: floatUp 6s linear infinite;
 }
 
 /* Animation ไฟกระพริบสำหรับกรอบ */
@@ -41,10 +53,17 @@ justify-content:center;
   100% { opacity: 1; transform: scale(1); }
 }
 
+/* --- [NEW] ชื่อร้านแบบมีเงาฟรุ้งฟริ้ง --- */
+h1 {
+  text-shadow: 2px 2px 4px rgba(229,142,125,0.2);
+  letter-spacing: 1px;
+}
+
 .container{
 max-width:500px;
 width:100%;
 padding:20px 15px 40px;
+position: relative;
 }
 
 .section{
@@ -54,8 +73,13 @@ padding:25px 20px;
 margin-bottom:20px;
 box-shadow:0 8px 20px rgba(0,0,0,0.05);
 border:2px solid var(--main);
-/* เพิ่มไฟกระพริบที่กรอบข้อความทุกอัน */
 animation: borderGlow 3s infinite ease-in-out;
+transition: transform 0.3s ease;
+}
+
+/* --- [NEW] เพิ่มลูกเล่นให้ Section ยุบได้เมื่อ Hover (สำหรับ Desktop) --- */
+.section:hover {
+  transform: translateY(-3px);
 }
 
 h1,h2,h3{color:var(--dark);}
@@ -67,6 +91,7 @@ border-radius:50%;
 overflow:hidden;
 margin:0 auto 20px;
 box-shadow:0 6px 20px var(--glow);
+border: 4px solid #fff; /* เพิ่มขอบขาวให้โลโก้ดูเด่น */
 }
 
 .logo img{width:100%;height:100%;object-fit:cover;}
@@ -86,7 +111,9 @@ border-radius:25px;
 box-shadow:0 4px 10px var(--glow);
 font-size:13px;
 color:var(--dark);
+transition: 0.3s;
 }
+.badge:hover { background: var(--main); color: #fff; }
 
 .btn{
 display:block;
@@ -96,20 +123,25 @@ border-radius:25px;
 text-decoration:none;
 margin-top:15px;
 font-weight:500;
-transition: 0.3s;
+transition: all 0.2s ease;
+}
+
+/* --- [NEW] ลูกเล่นปุ่มกดแล้วยุบ --- */
+.btn:active {
+  transform: scale(0.95);
 }
 
 .btn-outline{
 background:#fff;
 border:2px dashed var(--main);
 color:var(--dark);
-/* เพิ่มไฟกระพริบที่ปุ่มสถานะคิว */
 animation: statusGlow 2s infinite ease-in-out;
 }
 
 .btn-main{
 background:var(--main);
 color:#fff;
+box-shadow: 0 4px 15px var(--glow);
 }
 
 .step{
@@ -137,6 +169,7 @@ margin-bottom:10px;
 background:#fffcfd;
 padding:10px 15px;
 border-radius:15px;
+border-left: 4px solid var(--main); /* เพิ่มแถบสีด้านซ้ายให้ดูแพง */
 }
 
 .price-tag{
@@ -170,16 +203,19 @@ text-decoration:none;
 color:var(--dark);
 font-size:13px;
 border:1px solid #ffeef5;
+transition: 0.3s;
 }
+.socials a:hover { background: var(--bg); }
 
 .small{font-size:12px;opacity:.7;margin-top:10px;}
 
 .status-box{
-padding:10px;
+padding:12px;
 border-radius:12px;
 margin-top:10px;
 font-size:14px;
 color:#fff;
+box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
 }
 .bg-green{background:var(--green);}
 .bg-red{background:var(--red);}
@@ -187,12 +223,18 @@ color:#fff;
 </head>
 
 <body>
+
+<div class="heart-particle" style="left:10%; animation-delay:0s;">🌸</div>
+<div class="heart-particle" style="left:30%; animation-delay:2s;">✨</div>
+<div class="heart-particle" style="left:60%; animation-delay:4s;">🌸</div>
+<div class="heart-particle" style="left:80%; animation-delay:1s;">✨</div>
+
 <div class="container">
 
 <div class="section center" style="border:none;box-shadow:none;background:transparent; animation:none;">
 
 <div class="logo">
-<img src="logo.jpg" alt="logo">
+<img src="att.W0VLBxnGztt3-1UTcbp0hZ3ln4ajx29DONbw6kGO90U.jpg" alt="logo">
 </div>
 
 <h1>Fluke Design</h1>
@@ -207,7 +249,7 @@ color:#fff;
 </div>
 
 <a href="#" class="btn btn-outline">
-✅ เปิดรับคิวปกติค่า ✨
+✅ เปิดรับคิวปกติค่ะ ✨
 </a>
 </div>
 
@@ -260,8 +302,6 @@ color:#fff;
 
 <div class="socials">
 <a href="https://www.facebook.com/share/1ZzWfCLMjc/?mibextid=wwXIfr">Facebook</a>
-<a href="#">Instagram</a>
-<a href="#">LINE</a>
 </div>
 
 <p class="small">
